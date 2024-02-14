@@ -2,6 +2,7 @@ import AppBar from './components/AppBar/AppBar';
 import {Route, Routes} from 'react-router-dom';
 import Home from './containers/Home/Home';
 import Page from './containers/Page/Page';
+import Add from './containers/Add/Add';
 
 function App() {
 
@@ -11,7 +12,8 @@ function App() {
       <div className="container-fluid">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/pages/:pageName" element={<Page />}/>
+          <Route path="/pages/:pageName" element={<Page />} />
+          <Route path="/pages/admin" element={<Add />} />
           {/*<Route path="/posts" element={<Home />} />*/}
           {/*<Route path="/add" element={<Add edit={false} />} />*/}
           {/*<Route path="/posts/:id" element={<Post/>} >*/}

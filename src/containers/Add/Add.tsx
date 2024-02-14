@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {PostApi} from '../../types.d.';
 import Spinner from '../../components/Spinner/Spinner';
 import axiosAPI from '../../axiosAPI';
 import {useNavigate, useParams} from 'react-router-dom';
@@ -63,34 +62,44 @@ const Add: React.FC<Props> = ({edit}) => {
   return (<>
     {
       loading ? <Spinner/> :
-        <form className="mt-2" onSubmit={onFormSubmit}>
-          <div className="d-flex align-items-center">
-            <label htmlFor="title">{edit ? 'New Title:' : 'Title:'} </label>
-            <input
-              type="text"
-              className="form-control mx-3"
-              id="title"
-              placeholder="Title"
-              name="title"
-              value={post.title}
-              onChange={postChange}
-              required
-            />
+        <>
+          <div className="form-check">
+            <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
+                   checked/>
+            <label className="form-check-label" htmlFor="exampleRadios1">
+              Default radio
+            </label>
           </div>
-          <div className="d-flex flex-column align-items-center mt-3">
-            <label htmlFor="description">{edit ? 'New Post:' : 'Post:'}</label>
-            <textarea
-              className="form-control my-3"
-              id="description"
-              placeholder="Description"
-              name="description"
-              value={post.description}
-              onChange={postChange}
-              required
-            />
-            <button type="submit" className="btn btn-primary">{edit ? 'Edit' : 'Add post'}</button>
-          </div>
-        </form>
+          <form className="mt-2" onSubmit={onFormSubmit}>
+            <div className="d-flex align-items-center">
+              <label htmlFor="title">{edit ? 'New Title:' : 'Title:'} </label>
+              <input
+                type="text"
+                className="form-control mx-3"
+                id="title"
+                placeholder="Title"
+                name="title"
+                value={post.title}
+                onChange={postChange}
+                required
+              />
+            </div>
+            <div className="d-flex flex-column align-items-center mt-3">
+              <label htmlFor="description">{edit ? 'New Post:' : 'Post:'}</label>
+              <textarea
+                className="form-control my-3"
+                id="description"
+                placeholder="Description"
+                name="description"
+                value={post.description}
+                onChange={postChange}
+                required
+              />
+              <button type="submit" className="btn btn-primary">{edit ? 'Edit' : 'Add post'}</button>
+            </div>
+          </form>
+        </>
+
     }
   </>);
 };

@@ -44,10 +44,14 @@ const AppBar: React.FC = () => {
           {pages.map(page => {
             return (
               <li className="nav-item" key={Math.random()}>
-                <NavLink className="nav-link" to={`/pages/${page}`}>{page[0].toLocaleUpperCase()+page.slice(1)}</NavLink>
+                <NavLink className="nav-link"
+                         to={`/pages/${page}`}>{page[0].toLocaleUpperCase() + page.slice(1)}</NavLink>
               </li>
             );
           })}
+          <li className="nav-item" key={Math.random()}>
+            <NavLink className="nav-link" to={`/pages/admin`}>Admin</NavLink>
+          </li>
         </ul>
       }
 
