@@ -63,13 +63,11 @@ const Add: React.FC<Props> = ({edit}) => {
     {
       loading ? <Spinner/> :
         <>
-          <div className="form-check">
-            <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
-                   checked/>
-            <label className="form-check-label" htmlFor="exampleRadios1">
-              Default radio
-            </label>
+          <div className="form-check form-switch">
+            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexSwitchCheckChecked">Checked switch checkbox input</label>
           </div>
+
           <form className="mt-2" onSubmit={onFormSubmit}>
             <div className="d-flex align-items-center">
               <label htmlFor="title">{edit ? 'New Title:' : 'Title:'} </label>
