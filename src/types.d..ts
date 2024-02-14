@@ -1,14 +1,10 @@
-export interface PostApi {
+export interface PageApi {
   title: string,
-  description: string,
-  date: string,
+  content: string
 }
 
-export interface Post extends PostApi {
-  id: string
-}
-export interface PostsAPI extends PostApi {
-  [id: string]: PostApi
+export interface PagesApi extends PageApi {
+  [pageName: string]: PageApi
 }
 
 export interface Contacts {
