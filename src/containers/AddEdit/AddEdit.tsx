@@ -13,6 +13,7 @@ const AddEdit: React.FC = () => {
   const [targetPage, setTargetPage] = useState<PageApi>(initial);
   const [selectedPageName, setSelectedPageName] = useState('');
   const [edit, setEdit] = useState(true);
+  const [newPageName, setNewPageName] = useState('');
 
   const getData = useCallback(async () => {
     try {
@@ -21,14 +22,14 @@ const AddEdit: React.FC = () => {
       const pagesData = response.data;
 
       if (!pagesData) {
-        alert("This endpoint is empty.");
+        alert('This endpoint is empty.');
       }
 
       if (pagesData) {
         setPagesNames(Object.keys(pagesData));
       }
     } catch {
-      alert ('Please check requested URL.');
+      alert('Please check requested URL.');
     } finally {
       setLoading(false);
     }
@@ -46,17 +47,22 @@ const AddEdit: React.FC = () => {
       const pagesData = response.data;
 
       if (!pagesData) {
-        alert("This endpoint is empty.");
+        alert('This endpoint is empty.');
       }
 
       if (pagesData) {
         setTargetPage(pagesData);
       }
     } catch {
-      alert ('Please check requested URL.');
+      alert('Please check requested URL.');
     } finally {
       setLoading(false);
     }
+  };
+
+  const newPageOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value} = e.target;
+    setNewPageName(value);
   };
 
   const pageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,43 +76,72 @@ const AddEdit: React.FC = () => {
 
   const changeMode = () => {
     setEdit(!edit);
+    setNewPageName('');
+    setTargetPage(initial);
+    setSelectedPageName('');
   };
 
   const onFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (!edit) {
-        await axiosAPI.post('/pages/' + selectedPageName + '.json', targetPage); // TODO wrong fetch
+        await axiosAPI.post('/pages/' + newPageName + '.json', targetPage);
       } else if (edit) {
         await axiosAPI.put('/pages/' + selectedPageName + '.json', targetPage);
       }
     } catch {
-      alert ('Please check URL.');
+      alert('Please check URL.');
     } finally {
       setLoading(false);
     }
-    setPost(prevState => ({...prevState, post: '', date: ''}));
-    navigate('/');
+    // setPost(prevState => ({...prevState, post: '', date: ''}));
+    // navigate('/');
   };
 
   return (<>
-    <h1>{edit? 'Edit page' : 'Add new page'}</h1>
+    <h1>{edit ? 'Edit page' : 'Add new page'}</h1>
     <>
       <div className="form-check form-switch">
-        <input className="form-check-input" type="checkbox" role="switch" id="edit" onChange={changeMode} checked={edit} />
+        <input className="form-check-input" type="checkbox" role="switch" id="edit" onChange={changeMode}
+               checked={edit}/>
         <label className="form-check-label" htmlFor="edit">Edit mode</label>
       </div>
 
       <form className="mt-2" onSubmit={onFormSubmit}>
-        <select
-          className="form-select form-select-lg mb-3"
-          onChange={getPageData}
-          required
-          value={selectedPageName}
-        >
-          <option value="">--Select page--</option>
-          {pagesNames.map(pageName => <option value={pageName} key={Math.random()}>{pageName[0].toUpperCase()}{pageName.slice(1)}</option>)}
-        </select>
+        {edit ?
+          <select
+            className="form-select form-select-lg mb-3"
+            onChange={getPageData}
+            required
+            value={selectedPageName}
+          >
+            <option value="">--Select edited page--</option>
+            {pagesNames.map(pageName => {
+              return(
+                <option
+                  value={pageName}
+                  key={Math.random()}
+                >
+                  {pageName[0].toUpperCase()}{pageName.slice(1)}
+                </option>);
+            })}
+          </select> :
+          <>
+            <div className="form-group my-3">
+              <label htmlFor="newPageName">New page name:</label>
+              <input
+                type="text"
+                className="form-control"
+                id="newPageName"
+                name="newPageName"
+                placeholder="New page name"
+                value={newPageName}
+                onChange={newPageOnChange}
+                required
+              />
+            </div>
+          </>
+        }
 
         {loading ? <Spinner/> : <>
           {targetPage &&
