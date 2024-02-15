@@ -8,7 +8,11 @@ const initial: PageApi = {
   title: '',
   content: ''
 };
-const AddEdit: React.FC = () => {
+
+interface Props {
+  setRerender: (render: boolean) => void
+}
+const AddEdit: React.FC<Props> = ({setRerender}) => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -18,6 +22,7 @@ const AddEdit: React.FC = () => {
   const [edit, setEdit] = useState(true);
   const [newPageName, setNewPageName] = useState('');
   const [pageId, setPageId] = useState('');
+
 
   const getData = useCallback(async () => {
     try {
@@ -94,6 +99,7 @@ const AddEdit: React.FC = () => {
       if (!edit) {
         await axiosAPI.post('/pages/' + newPageName + '.json', targetPage);
         navigate('/pages/' + newPageName);
+        setRerender(true);
       } else if (edit) {
         await axiosAPI.put(`/pages/${selectedPageName}/${pageId}.json`, targetPage);
         navigate('/pages/' + selectedPageName);

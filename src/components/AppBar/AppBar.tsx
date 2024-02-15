@@ -4,7 +4,11 @@ import {PagesApi} from '../../types.d.';
 import axiosAPI from '../../axiosAPI';
 import Spinner from '../Spinner/Spinner';
 
-const AppBar: React.FC = () => {
+interface Props {
+  rerender: boolean
+}
+
+const AppBar: React.FC<Props> = ({rerender}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pages, setPages] = useState<string[]>([]);
 
@@ -32,7 +36,7 @@ const AppBar: React.FC = () => {
 
   useEffect(() => {
     void getData();
-  }, [getData]);
+  }, [getData, rerender]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary px-3">
