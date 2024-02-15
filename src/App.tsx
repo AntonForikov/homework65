@@ -14,13 +14,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/pages/:pageName" element={<Page />} />
           <Route path="/pages/admin" element={<AddEdit />} />
-          {/*<Route path="/posts" element={<Home />} />*/}
-          {/*<Route path="/add" element={<AddEdit edit={false} />} />*/}
-          {/*<Route path="/posts/:id" element={<Post/>} >*/}
-          {/*  <Route path="edit" element={<AddEdit edit={true} />}/>*/}
-          {/*</Route>*/}
-          {/*<Route path="/about" element={<About />} />*/}
-          {/*<Route path="/contacts" element={<Contacts />} />*/}
           <Route path="*" element={<h1>Not found</h1>} />
         </Routes>
       </div>

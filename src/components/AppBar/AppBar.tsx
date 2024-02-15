@@ -37,7 +37,7 @@ const AppBar: React.FC = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary px-3">
       <div className="container-md">
-        <NavLink className="navbar-brand" to="/pages">Pages</NavLink>
+        <NavLink className="navbar-brand" to="/">Pages</NavLink>
       </div>
       {isLoading ? <Spinner/> :
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -45,7 +45,10 @@ const AppBar: React.FC = () => {
             return (
               <li className="nav-item" key={Math.random()}>
                 <NavLink className="nav-link"
-                         to={`/pages/${page}`}>{page[0].toLocaleUpperCase() + page.slice(1)}</NavLink>
+                         to={`/pages/${page}`}
+                >
+                  {page[0].toLocaleUpperCase() + page.slice(1)}
+                </NavLink>
               </li>
             );
           })}
