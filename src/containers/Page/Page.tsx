@@ -37,8 +37,8 @@ const Page: React.FC = () => {
   return (
     <>
       {isLoading ? <Spinner/> : pageContent ?
-        <div>
-          <h1 className="text-center">{pageContent.title}</h1>
+        <div className="text-center">
+          <h1>{pageContent.title}</h1>
           <p>{pageContent.content}</p>
         </div> : <h1>No data in database for this page!</h1>
       }

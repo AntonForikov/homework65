@@ -3,18 +3,10 @@ export interface PageApi {
   content: string
 }
 
+export interface PageType  extends PageApi{
+  pageName: string
+}
+
 export interface PagesApi extends PageApi {
   [pageName: string]: PageApi
-}
-
-export interface Contacts {
-  address: string,
-  city: string,
-  country: string,
-  email: string,
-  tel: string,
-}
-
-export interface About {
-  content: string
 }

@@ -2,7 +2,7 @@ import AppBar from './components/AppBar/AppBar';
 import {Route, Routes} from 'react-router-dom';
 import Home from './containers/Home/Home';
 import Page from './containers/Page/Page';
-import Add from './containers/Add/Add';
+import AddEdit from './containers/AddEdit/AddEdit';
 
 function App() {
 
@@ -13,11 +13,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/pages/:pageName" element={<Page />} />
-          <Route path="/pages/admin" element={<Add />} />
+          <Route path="/pages/admin" element={<AddEdit />} />
           {/*<Route path="/posts" element={<Home />} />*/}
-          {/*<Route path="/add" element={<Add edit={false} />} />*/}
+          {/*<Route path="/add" element={<AddEdit edit={false} />} />*/}
           {/*<Route path="/posts/:id" element={<Post/>} >*/}
-          {/*  <Route path="edit" element={<Add edit={true} />}/>*/}
+          {/*  <Route path="edit" element={<AddEdit edit={true} />}/>*/}
           {/*</Route>*/}
           {/*<Route path="/about" element={<About />} />*/}
           {/*<Route path="/contacts" element={<Contacts />} />*/}
