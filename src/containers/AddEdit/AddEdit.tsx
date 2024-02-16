@@ -77,7 +77,7 @@ const AddEdit: React.FC<Props> = ({setRerender}) => {
     setNewPageName(value);
   };
 
-  const pageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const pageChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = e.target;
 
     setTargetPage((prevState) => ({
@@ -178,8 +178,7 @@ const AddEdit: React.FC<Props> = ({setRerender}) => {
               </div>
               <div className="form-group my-3">
                 <label htmlFor="content">{edit ? 'Edit page content:' : 'New page content'}</label>
-                <input
-                  type="text"
+                <textarea
                   className="form-control"
                   id="content"
                   name="content"
